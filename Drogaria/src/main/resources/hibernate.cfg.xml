@@ -32,7 +32,7 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Mapping with entities -->
-		
+		<mapping class="br.com.ricardow.drogaria.domain.Cidade" />
 		<mapping class="br.com.ricardow.drogaria.domain.Estado" />
 		<mapping class="br.com.ricardow.drogaria.domain.Fabricante" />
 		
