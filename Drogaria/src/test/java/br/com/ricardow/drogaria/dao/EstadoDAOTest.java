@@ -65,4 +65,23 @@ public class EstadoDAOTest {
 			System.out.println(estado.getSigla() + " - " + estado.getNome());
 		}
 	}
+	
+	@Test
+	public void editar() {
+		Long codigo = 22L;
+		
+		EstadoDAO estadoDAO = new EstadoDAO();
+		Estado estado = estadoDAO.buscar(codigo);
+		
+		if(estado == null) {
+			System.out.println("Nenhum registro encontrado.");
+		}
+		else {
+			estado.setNome("Espírito Santo");
+			estado.setSigla("ES");
+			estadoDAO.editar(estado);
+			System.out.println("Registro editado:");
+			System.out.println(estado.getSigla() + " - " + estado.getNome());
+		}
+	}
 }
