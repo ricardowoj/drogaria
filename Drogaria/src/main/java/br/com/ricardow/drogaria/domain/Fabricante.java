@@ -9,7 +9,7 @@ public class Fabricante extends GenericDomain {
 	@Column(length = 50, nullable = false)
 	private String razaoSocial;
 	
-	@Column(length = 12, nullable = false)
+	@Column(length = 14, nullable = false)
 	private String cnpj;
 	
 	@Column(length = 500, nullable = false)
