@@ -30,6 +30,11 @@
 
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">validate</property>
+		
+		<!-- Hibernate Slow to Acquire Postgres Connection -->
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+		<property name="hibernate.jdbc.use_get_generated_keys">true</property>
+		<property name="hibernate.jdbc.use_scrollable_resultset">true</property>
 
 		<!-- Mapping with entities -->
 		<mapping class="br.com.ricardow.drogaria.domain.Cidade" />
