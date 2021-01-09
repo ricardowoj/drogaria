@@ -34,6 +34,7 @@ public class FabricanteDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void buscar() {
 		Long codigo = 20L;
 		
@@ -44,6 +45,24 @@ public class FabricanteDAOTest {
 			System.out.println("Nenhum registro encontrado.");
 		}
 		else {
+			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void excluir() {
+		Long codigo = 17L;
+		
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+		fabricanteDAO.excluir(fabricante);
+		
+		if(fabricante == null) {
+			System.out.println("Nenhum registro encontrado.");
+		}
+		else {
+			System.out.println("Registro removido:");
 			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
 		}
 	}
