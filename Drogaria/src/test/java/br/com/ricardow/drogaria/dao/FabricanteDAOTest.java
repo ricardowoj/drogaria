@@ -21,6 +21,7 @@ public class FabricanteDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void listar() {
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
 		List<Fabricante> resultado = fabricanteDAO.listar();
@@ -28,6 +29,21 @@ public class FabricanteDAOTest {
 		System.out.println("Total de registro: " + resultado.size());
 		
 		for(Fabricante fabricante : resultado) {
+			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
+		}
+	}
+	
+	@Test
+	public void buscar() {
+		Long codigo = 20L;
+		
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+		
+		if(fabricante == null) {
+			System.out.println("Nenhum registro encontrado.");
+		}
+		else {
 			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
 		}
 	}
