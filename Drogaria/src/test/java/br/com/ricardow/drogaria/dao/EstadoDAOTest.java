@@ -46,6 +46,23 @@ public class EstadoDAOTest {
 		else {
 			System.out.println(estado.getSigla() + " - " + estado.getNome());
 		}
+	}
+	
+	@Test
+	@Ignore
+	public void excluir() {
+		Long codigo = 20L;
 		
+		EstadoDAO estadoDAO = new EstadoDAO();
+		Estado estado = estadoDAO.buscar(codigo);
+		estadoDAO.excluir(estado);
+		
+		if(estado == null) {
+			System.out.println("Nenhum registro encontrado.");
+		}
+		else {
+			System.out.println("Registro removido:");
+			System.out.println(estado.getSigla() + " - " + estado.getNome());
+		}
 	}
 }
