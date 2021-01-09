@@ -66,4 +66,24 @@ public class FabricanteDAOTest {
 			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
 		}
 	}
+	
+	@Test
+	public void editar() {
+		Long codigo = 18L;
+		
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+		
+		if(fabricante == null) {
+			System.out.println("Nenhum registro encontrado.");
+		}
+		else {
+			fabricante.setRazaoSocial("FSBR - FABRICA DE SOFTWARE DO BRASIL LTDA");
+			fabricante.setCnpj("202631100001");
+			fabricante.setDescricao("DESENVOLVIMENTO E LICENCIAMENTO DE PROGRAMAS DE COMPUTADOR CUSTOMIZÁVEIS");
+			fabricanteDAO.editar(fabricante);
+			System.out.println("Registro editado:");
+			System.out.println(fabricante.getRazaoSocial() + " - " + fabricante.getCnpj() + " - " + fabricante.getDescricao());
+		}
+	}
 }
