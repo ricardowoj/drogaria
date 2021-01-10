@@ -26,7 +26,7 @@ public class PessoaDAOTest {
 			pessoa.setCpf("06889189647");
 			pessoa.setRg("11645605");
 			pessoa.setRua("Rua Quirua");
-			pessoa.setNumero((short) 619);
+			pessoa.setNumero(Short.valueOf("619"));
 			pessoa.setBairro("Suru");
 			pessoa.setCep("06509012");
 			pessoa.setComplemento("Cond. New Ville");
@@ -109,7 +109,7 @@ public class PessoaDAOTest {
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			Pessoa pessoa = pessoaDAO.buscar(28L);
 			pessoa.setRua("Lourenço Collino");
-			pessoa.setNumero((short) 348);
+			pessoa.setNumero(Short.valueOf("619"));
 			pessoa.setBairro("Pres. Altino");
 			pessoa.setCep("06216260");
 			pessoa.setComplemento("Próximo estação Osasco");
