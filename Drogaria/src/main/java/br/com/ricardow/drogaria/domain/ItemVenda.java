@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity
-public class itemVenda extends GenericDomain {
+public class ItemVenda extends GenericDomain {
 	@Column(nullable = false)
 	private Short quantidade;
 	
