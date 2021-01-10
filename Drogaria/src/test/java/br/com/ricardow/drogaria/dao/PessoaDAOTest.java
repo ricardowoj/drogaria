@@ -38,9 +38,8 @@ public class PessoaDAOTest {
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoaDAO.salvar(pessoa);
 			
-			cidadeDAO.excluir(cidade);
-			System.out.println("Registro removido:");
-			System.out.println("Nome da cidade: " + cidade.getNome());
+			System.out.println("Registro salvo:");
+			System.out.println("Nome da pessoa: " + pessoa.getNome());
 		}
 	}
 	
