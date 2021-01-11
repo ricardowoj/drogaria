@@ -16,10 +16,10 @@ public class VendaDAOTest {
 	@Ignore
 	public void salvar() {
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		Funcionario funcionario = funcionarioDAO.buscar(38L);
+		Funcionario funcionario = funcionarioDAO.buscar(9L);
 		
 		ClienteDAO clienteDAO = new ClienteDAO();
-		Cliente cliente = clienteDAO.buscar(36L);
+		Cliente cliente = clienteDAO.buscar(10L);
 		
 		if(funcionario == null) {
 			System.out.println("Nenhum registro encontrado para funcionário.");

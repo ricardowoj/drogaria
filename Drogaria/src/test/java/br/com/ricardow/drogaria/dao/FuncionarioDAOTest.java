@@ -14,7 +14,7 @@ public class FuncionarioDAOTest {
 	@Ignore
 	public void salvar() {
 		PessoaDAO pessoaDAO = new PessoaDAO();
-		Pessoa pessoa = pessoaDAO.buscar(29L);
+		Pessoa pessoa = pessoaDAO.buscar(8L);
 		
 		if(pessoa == null) {
 			System.out.println("Nenhum registro encontrado para pessoa.");

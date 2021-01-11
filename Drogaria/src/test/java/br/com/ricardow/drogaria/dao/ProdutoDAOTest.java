@@ -11,9 +11,8 @@ import br.com.ricardow.drogaria.domain.Produto;
 
 public class ProdutoDAOTest {
 	@Test
-	@Ignore
 	public void salvar() {
-		Long codigoFabricante = 18L;
+		Long codigoFabricante = 1L;
 		
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
 		Fabricante fabricante = fabricanteDAO.buscar(codigoFabricante);

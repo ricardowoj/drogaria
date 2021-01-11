@@ -12,7 +12,7 @@ public class PessoaDAOTest {
 	@Test
 	@Ignore
 	public void salvar() {
-		Long codigo = 25L;
+		Long codigo = 7L;
 		
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.buscar(codigo);

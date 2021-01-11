@@ -13,7 +13,7 @@ public class CidadeDAOTest {
 	@Ignore
 	public void salvar() {
 		EstadoDAO estadoDAO = new EstadoDAO();
-		Estado estado = estadoDAO.buscar(21L);
+		Estado estado = estadoDAO.buscar(3L);
 		
 		Cidade cidade = new Cidade();
 		cidade.setNome("Osasco");

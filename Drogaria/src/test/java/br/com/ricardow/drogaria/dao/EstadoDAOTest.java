@@ -9,7 +9,6 @@ import br.com.ricardow.drogaria.domain.Estado;
 
 public class EstadoDAOTest {
 	@Test
-	@Ignore
 	public void salvar() {
 		Estado estado = new Estado();
 		estado.setNome("São Paulo");
