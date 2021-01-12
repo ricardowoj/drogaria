@@ -5,10 +5,26 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
-<title>Teste PrimeFaces</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+	<title>Testes</title>
 </h:head>
 <h:body>
-	<p:editor/>
+
+	<h:form>
+		<p:panel header="Testes - Listagem">
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				paginator="true">
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Testes - Cadastro" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form>
+
+		</h:form>
+	</p:dialog>
+
 </h:body>
 </html>
