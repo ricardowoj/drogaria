@@ -9,39 +9,61 @@
 	<title>Cidades</title>
 </h:head>
 <h:body>
-
-	<h:form>
+	<p:growl id="mensagem" />
+	<h:form id="formListagem">
 		<p:panel header="Cidades - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
-				<f:facet name="footer">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"></p:commandButton>
-				</f:facet>
+			<!-- Tabela Listagem -->
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{cidadeBean.cidades}" var="cidade"
+				rows="10">
 
-				<p:column headerText="Nome"></p:column>
-				<p:column headerText="Estado"></p:column>
-				<p:column headerText="Opções"></p:column>
+				<p:column headerText="Cidade" filterBy="#{cidade.nome}"
+					sortBy="#{cidade.nome}">
+					<h:outputText value="#{cidade.nome}" />
+				</p:column>
+
+				<p:column headerText="Estado" filterBy="#{cidade.estado.nome}"
+					sortBy="#{cidade.nome}">
+					<h:outputText value="#{cidade.estado.nome}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+				</p:column>
+				<!-- Botão novo Fabricante -->
+				<f:facet name="footer">
+					<p:commandButton value="Nova Cidade"
+						actionListener="#{cidadeBean.novo()}"
+						oncomplete="PF('dialogo').show();"
+						update=":mensagem :formCadastro:painel" />
+				</f:facet>
 			</p:dataTable>
 		</p:panel>
+
+
 	</h:form>
 
 	<p:dialog header="Cidades - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Nome:" />
-				<p:inputText maxlength="50" size="50" />
+				<p:inputText maxlength="50" size="50"
+					value="#{cidadeBean.cidade.nome}" />
 
 				<p:outputLabel value="Estado:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione uma cidade"/>
+				<p:selectOneMenu filter="true" value="#{cidadeBean.cidade.estado}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma cidade" />
+					<f:selectItems value="#{cidadeBean.estados}" var="estado"
+						itemValue="#{estado}" itemLabel="#{estado.nome}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
-
+			<!-- Botão Salvar-->
 			<h:panelGrid columns="4">
-				<p:commandButton value="Excluir" />
-				<p:commandButton value="Editar" />
-				<p:commandButton value="Salvar" />
+				<p:commandButton value="Salvar"
+					actionListener="#{cidadeBean.salvar()}"
+					update=":mensagem :formCadastro:painel :formListagem:tabela" />
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
 			</h:panelGrid>
 		</h:form>
