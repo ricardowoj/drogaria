@@ -46,10 +46,6 @@ public class FabricanteBean implements Serializable {
 		}
 	}
 	
-	public void novo() {
-		fabricante = new Fabricante();
-	}
-	
 	public void salvar() {
 		try {
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
