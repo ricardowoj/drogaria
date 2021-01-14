@@ -9,40 +9,73 @@
 	<title>Fabricantes</title>
 </h:head>
 <h:body>
-	<h:form>
+	<p:growl id="mensagem" />
+	<h:form id="formListagem">
 		<p:panel header="Fabricantes - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
-				<p:column headerText="Razão Social"></p:column>
-				<p:column headerText="CNPJ"></p:column>
-				<p:column headerText="Descrição"></p:column>
-				<p:column headerText="Opções"></p:column>
+			<!-- Tabela Listagem -->
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{fabricanteBean.fabricantes}"
+				var="fabricante" rows="10">
+				<!-- Fabricantes Razão Social -->
+				<p:column headerText="Razão Social"
+					filterBy="#{fabricante.razaoSocial}"
+					sortBy="#{fabricante.razaoSocial}">
+					<h:outputText value="#{fabricante.razaoSocial}" />
+				</p:column>
+				<!-- Fabricantes CNPJ -->
+				<p:column headerText="CNPJ" filterBy="#{fabricante.cnpj}"
+					sortBy="#{fabricante.cnpj}">
+					<h:outputText value="#{fabricante.cnpj}" />
+				</p:column>
+				<!-- Fabricantes Descrição -->
+				<p:column headerText="Fabricante">
+					<h:outputText value="#{fabricante.descricao}" />
+				</p:column>
+
+				<!-- Opções -->
+				<p:column headerText="Opções">
+					<!-- Botão excluir -->
+					<p:commandButton icon="ui-icon-trash">
+
+					</p:commandButton>
+					<!-- Botão editar -->
+					<p:commandButton icon="ui-icon-pencil">
+
+					</p:commandButton>
+				</p:column>
+
+				<!-- Botão novo Fabricante -->
 				<f:facet name="footer">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"></p:commandButton>
+					<p:commandButton value="Novo Fabricante"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{fabricanteBean.novo}" />
 				</f:facet>
 			</p:dataTable>
 		</p:panel>
 	</h:form>
-
+	<!-- Caixa de Cadastro Fabricante -->
 	<p:dialog header="Fabricantes - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Razão social:" />
-				<p:inputText maxlength="50" size="50" />
+				<p:inputText maxlength="50" size="50"
+					value="#{fabricanteBean.fabricante.razaoSocial}" />
 
 				<p:outputLabel value="CNPJ:" />
-				<p:inputText maxlength="14" size="50" />
+				<p:inputText maxlength="14" size="50"
+					value="#{fabricanteBean.fabricante.cnpj}" />
 
 				<p:outputLabel value="Descrição:" />
-				<p:inputText maxlength="250" size="50" />
+				<p:inputText maxlength="250" size="50"
+					value="#{fabricanteBean.fabricante.descricao}" />
 			</h:panelGrid>
-
+			<!-- Botão Salvar-->
 			<h:panelGrid columns="4">
-				<p:commandButton value="Excluir" />
-				<p:commandButton value="Editar" />
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				<p:commandButton value="Salvar"
+					actionListener="#{fabricanteBean.salvar()}"
+					update=":mensagem :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide()" />
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>
