@@ -31,24 +31,40 @@
 				<p:column headerText="Fabricante">
 					<h:outputText value="#{fabricante.descricao}" />
 				</p:column>
-
 				<!-- Opções -->
 				<p:column headerText="Opções">
 					<!-- Botão excluir -->
-					<p:commandButton icon="ui-icon-trash">
-
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{fabricanteBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação" message="Deseja excluir a cidade?" />
+						<f:attribute name="fabricanteSelecionado" value="#{fabricante}" />
 					</p:commandButton>
+					<!-- Confirmação de Excluir -->
+					<p:confirmDialog global="true">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 					<!-- Botão editar -->
-					<p:commandButton icon="ui-icon-pencil">
-
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{fabricanteBean.editar}"
+						update=":mensagem :formCadastro:painel"
+						oncomplete="PF('dialogo').show()">
+						<f:attribute name="fabricanteSelecionado" value="#{fabricante}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</p:column>
-
 				<!-- Botão novo Fabricante -->
 				<f:facet name="footer">
 					<p:commandButton value="Novo Fabricante"
-						oncomplete="PF('dialogo').show();"
-						actionListener="#{fabricanteBean.novo}" />
+						actionListener="#{fabricanteBean.novo()}"
+						update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 				</f:facet>
 			</p:dataTable>
 		</p:panel>
@@ -59,15 +75,18 @@
 		<h:form id="formCadastro">
 			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Razão social:" />
-				<p:inputText maxlength="50" size="50"
+				<p:inputText maxlength="50" size="50" required="true"
+					requiredMessage="O campo Razão Social é obrigatório"
 					value="#{fabricanteBean.fabricante.razaoSocial}" />
 
 				<p:outputLabel value="CNPJ:" />
-				<p:inputText maxlength="14" size="50"
+				<p:inputText maxlength="14" size="50" required="true"
+					requiredMessage="O campo CNPJ é obrigatório"
 					value="#{fabricanteBean.fabricante.cnpj}" />
 
 				<p:outputLabel value="Descrição:" />
-				<p:inputText maxlength="250" size="50"
+				<p:inputText maxlength="250" size="50" required="true"
+					requiredMessage="O campo descrição é obrigatório"
 					value="#{fabricanteBean.fabricante.descricao}" />
 			</h:panelGrid>
 			<!-- Botão Salvar-->
