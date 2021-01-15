@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -29,7 +30,7 @@ public class CidadeBean implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
+
 	public List<Cidade> getCidades() {
 		return cidades;
 	}
@@ -37,31 +38,34 @@ public class CidadeBean implements Serializable {
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
 	}
-	
+
 	public List<Estado> getEstados() {
 		return estados;
 	}
-	
+
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
-	
+
+	public void novaCidade() {
+		cidade = new Cidade();
+	}
+
 	@PostConstruct
 	public void listar() {
 		try {
 			CidadeDAO cidadeDAO = new CidadeDAO();
 			cidades = cidadeDAO.listar();
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao listar as cidades");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void novo() {
 		try {
-			cidade = new Cidade();
-			
+			novaCidade();
+
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar();
 		} catch (Exception e) {
@@ -69,25 +73,51 @@ public class CidadeBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void salvar() {
 		try {
 			CidadeDAO cidadeDAO = new CidadeDAO();
 			cidadeDAO.merge(cidade);
-			
-			cidade = new Cidade();
-			
+
+			novaCidade();
+
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar();
-			
+
 			cidades = cidadeDAO.listar();
-			
+
 			Messages.addFlashGlobalInfo("Cidade salva com sucesso");
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao salvar a cidade");
 			e.printStackTrace();
 		}
 	}
 
+	public void excluir(ActionEvent event) {
+		try {
+			cidade = (Cidade) event.getComponent().getAttributes().get("cidadeSelecionada");
+
+			CidadeDAO cidadeDAO = new CidadeDAO();
+			cidadeDAO.excluir(cidade);
+
+			cidades = cidadeDAO.listar();
+
+			Messages.addGlobalInfo("Cidade excluída com sucesso.");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao excluir a cidade");
+			e.printStackTrace();
+		}
+	}
+	
+	public void editar(ActionEvent event) {
+		try {
+			cidade = (Cidade) event.getComponent().getAttributes().get("cidadeSelecionada");
+			
+			EstadoDAO estadoDAO = new EstadoDAO();
+			estados = estadoDAO.listar();
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao editar a cidade");
+		}
+		
+	}
 }
