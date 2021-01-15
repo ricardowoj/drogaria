@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -46,13 +47,16 @@ public class FabricanteBean implements Serializable {
 		}
 	}
 	
+	public void novo() {
+		fabricante = new Fabricante();
+	}
+	
 	public void salvar() {
 		try {
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
 			fabricanteDAO.merge(fabricante);
 			
-			fabricante = new Fabricante();
-			
+			novo();
 			fabricantes = fabricanteDAO.listar();
 			
 			Messages.addFlashGlobalInfo("Fabricante salvo com sucesso");
@@ -61,6 +65,25 @@ public class FabricanteBean implements Serializable {
 			Messages.addFlashGlobalError("Ocorreu um erro ao salvar o fabricante");
 			e.printStackTrace();
 		}
-
+	}
+	
+	public void excluir(ActionEvent event) {
+		try {
+			fabricante = (Fabricante) event.getComponent().getAttributes().get("fabricanteSelecionado");
+			
+			FabricanteDAO fabricanteDAO = new FabricanteDAO();
+			fabricanteDAO.excluir(fabricante);
+			
+			fabricantes = fabricanteDAO.listar();
+			
+			Messages.addFlashGlobalInfo("Fabricante removido com sucesso");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao salvar o fabricante");
+			e.printStackTrace();
+		}
+	}
+	
+	public void editar(ActionEvent event) {
+		fabricante = (Fabricante) event.getComponent().getAttributes().get("fabricanteSelecionado");
 	}
 }
